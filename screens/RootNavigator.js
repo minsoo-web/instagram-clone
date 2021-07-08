@@ -9,12 +9,13 @@ import RegisterScreen from "./auth/RegisterScreen";
 import LoginScreen from "./auth/LoginScreen";
 import MainNavigator from "./main/MainNavigator";
 import AddScreen from "./main/AddScreen";
+import SaveScreen from "./main/SaveScreen";
 
 import { auth } from "../firebase";
 
 const Stack = createStackNavigator();
 
-const RootNavigator = () => {
+const RootNavigator = ({ navigation }) => {
   const [loaded, setLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -54,6 +55,7 @@ const RootNavigator = () => {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={MainNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Add" component={AddScreen} />
+          <Stack.Screen name="Save" component={SaveScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );

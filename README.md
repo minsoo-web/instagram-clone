@@ -16,3 +16,5 @@
     아래에만 주고 싶으면 `['bottom']` 이렇게 주면 된다.
 - Camera
   - Take a Picture
+  - picking a picture
+  - save picture to storage -> to firestore
