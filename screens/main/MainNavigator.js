@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { setUserState } from "../../features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { auth, db } from "../../firebase";
@@ -10,7 +10,7 @@ import FeedScreen from "./FeedScreen";
 import AddScreen from "./AddScreen";
 import ProfileScreen from "./ProfileScreen";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const EmptyScreen = () => {
   return null;
@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <Tab.Navigator initialRouteName="Feed">
+    <Tab.Navigator initialRouteName="Feed" labeled={false}>
       <Tab.Screen
         name="Feed"
         component={FeedScreen}
