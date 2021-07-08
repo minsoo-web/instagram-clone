@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View, Button } from "react-native";
-import { auth } from "../firebase";
+import { auth, db } from "../../firebase";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -10,10 +10,9 @@ const RegisterScreen = () => {
   const register = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then(authUser => {
-        authUser.user.updateProfile({
-          displayName: name
-        });
+      .then(() => {
+        // db에 유저 데이터 추가
+        db.collection("users").doc(auth.currentUser.uid).set({ name, email });
       })
       .catch(error => alert(error.message));
   };
