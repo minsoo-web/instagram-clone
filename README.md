@@ -18,3 +18,6 @@
   - Take a Picture
   - picking a picture
   - save picture to storage -> to firestore
+- `A non-serializable value was detected in an action` 이슈
+  - https://github.com/rt2zz/redux-persist/issues/988#issuecomment-529407939
+  - middleware 에 옵션을 달아주면 해결된다.

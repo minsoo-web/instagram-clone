@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { setUserState } from "../../features/user/userSlice";
 import { useDispatch } from "react-redux";
-import { auth, db } from "../../firebase";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import FeedScreen from "./FeedScreen";
-import AddScreen from "./AddScreen";
 import ProfileScreen from "./ProfileScreen";
+
+import { fetchUserState, fetchUsetPosts } from "../../features/user/userSlice";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -20,14 +18,8 @@ const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    db.collection("users")
-      .doc(auth.currentUser.uid)
-      .get()
-      .then(result => {
-        if (result.exists) {
-          dispatch(setUserState(result.data()));
-        } else console.log("no exist");
-      });
+    dispatch(fetchUserState());
+    dispatch(fetchUsetPosts());
   }, []);
 
   return (
@@ -70,5 +62,3 @@ const HomeScreen = ({ navigation }) => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({});
