@@ -44,7 +44,7 @@ export const fetchUsetPosts = () => {
       .collection("posts")
       .doc(auth.currentUser.uid)
       .collection("userPosts")
-      .orderBy("creation", "asc")
+      .orderBy("creation", "desc")
       .get();
 
     const dispatchData = response.docs.map(doc => {
