@@ -7,7 +7,8 @@ import FeedScreen from "./FeedScreen";
 import SearchScreen from "./SearchScreen";
 import ProfileScreen from "./ProfileScreen";
 
-import { fetchUserState, fetchUsetPosts } from "../../features/user/userSlice";
+import { fetchUserState, fetchUsetPosts, fetchUsetFollowing } from "../../features/user/userSlice";
+import { auth } from "../../firebase";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -21,6 +22,7 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     dispatch(fetchUserState());
     dispatch(fetchUsetPosts());
+    dispatch(fetchUsetFollowing());
   }, []);
 
   return (
@@ -63,6 +65,12 @@ const HomeScreen = ({ navigation }) => {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
+        listeners={({ navigation }) => ({
+          tabPress: event => {
+            event.preventDefault();
+            navigation.navigate("Profile", { uid: auth.currentUser.uid });
+          }
+        })}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-circle" color={color} size={24} />

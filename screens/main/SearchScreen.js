@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { db } from "../../firebase";
 
 const SearchScreen = ({ navigation }) => {
@@ -21,7 +22,7 @@ const SearchScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <TextInput placeholder="Type here ..." onChangeText={search => fetchUsers(search)} />
       <FlatList
         data={users}
@@ -33,7 +34,7 @@ const SearchScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -48,7 +48,7 @@ const saveScreen = ({
       })
       .then(() => {
         // 홈으로
-        navigation.popToTop();
+        navigation.navigate("Feed");
       });
   };
 

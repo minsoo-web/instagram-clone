@@ -3,7 +3,8 @@ import { auth, db } from "../../firebase";
 
 const initialState = {
   currentUser: null,
-  userPosts: []
+  userPosts: [],
+  userFollowing: []
 };
 
 const userSlice = createSlice({
@@ -15,14 +16,18 @@ const userSlice = createSlice({
     },
     setUserPost: (state, action) => {
       state.userPosts = action.payload;
+    },
+    setUserFollowing: (state, action) => {
+      state.userFollowing = action.payload;
     }
   }
 });
 
-export const { setUserState, setUserPost } = userSlice.actions;
+export const { setUserState, setUserPost, setUserFollowing } = userSlice.actions;
 
 export const selectCurrentUser = state => state.user.currentUser;
 export const selectUserPosts = state => state.user.userPosts;
+export const selectUserFollowing = state => state.user.userFollowing;
 
 export default userSlice.reducer;
 
@@ -30,7 +35,6 @@ export default userSlice.reducer;
 export const fetchUserState = () => {
   return async dispatch => {
     const response = await db.collection("users").doc(auth.currentUser.uid).get();
-
     if (response.exists) {
       dispatch(setUserState(response.data()));
     } else console.log("no exist");
@@ -52,7 +56,22 @@ export const fetchUsetPosts = () => {
       const id = doc.id;
       return { id, ...data };
     });
-
     dispatch(setUserPost(dispatchData));
+  };
+};
+
+// 유저 포스트
+export const fetchUsetFollowing = () => {
+  return dispatch => {
+    db.collection("following")
+      .doc(auth.currentUser.uid)
+      .collection("userFollowing")
+      .onSnapshot(snapshot => {
+        let following = snapshot.docs.map(doc => {
+          const id = doc.id;
+          return id;
+        });
+        dispatch(setUserFollowing(following));
+      });
   };
 };
