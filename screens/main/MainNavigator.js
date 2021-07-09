@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import FeedScreen from "./FeedScreen";
+import SearchScreen from "./SearchScreen";
 import ProfileScreen from "./ProfileScreen";
 
 import { fetchUserState, fetchUsetPosts } from "../../features/user/userSlice";
@@ -33,6 +34,17 @@ const HomeScreen = ({ navigation }) => {
           )
         }}
       />
+
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="magnify" color={color} size={24} />
+          )
+        }}
+      />
+
       <Tab.Screen
         name="AddContainer"
         component={EmptyScreen}

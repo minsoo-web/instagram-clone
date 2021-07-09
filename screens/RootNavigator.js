@@ -53,7 +53,7 @@ const RootNavigator = ({ navigation }) => {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={MainNavigator} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={MainNavigator} />
           <Stack.Screen name="Add" component={AddScreen} />
           <Stack.Screen name="Save" component={SaveScreen} />
         </Stack.Navigator>

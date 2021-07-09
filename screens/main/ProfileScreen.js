@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Button, SafeAreaView, StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { selectUserPosts, selectCurrentUser } from "../../features/user/userSlice";
 
-function ProfileScreen({ navigation }) {
+function ProfileScreen({ navigation, route }) {
   const posts = useSelector(selectUserPosts);
   const currentUser = useSelector(selectCurrentUser);
 
