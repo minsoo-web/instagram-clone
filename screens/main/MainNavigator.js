@@ -7,7 +7,7 @@ import FeedScreen from "./FeedScreen";
 import SearchScreen from "./SearchScreen";
 import ProfileScreen from "./ProfileScreen";
 
-import { fetchUserState, fetchUsetPosts, fetchUsetFollowing } from "../../features/user/userSlice";
+import { fetchUserState, fetchUserPosts, fetchUsetFollowing } from "../../features/user/userSlice";
 import { auth } from "../../firebase";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(fetchUserState());
-    dispatch(fetchUsetPosts());
+    dispatch(fetchUserPosts());
     dispatch(fetchUsetFollowing());
   }, []);
 

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { auth, db } from "../../firebase";
+import { fetchUsersData } from "./usersSlice";
 
 const initialState = {
   currentUser: null,
@@ -42,7 +43,7 @@ export const fetchUserState = () => {
 };
 
 // 유저 포스트
-export const fetchUsetPosts = () => {
+export const fetchUserPosts = () => {
   return async dispatch => {
     const response = await db
       .collection("posts")
@@ -72,6 +73,9 @@ export const fetchUsetFollowing = () => {
           return id;
         });
         dispatch(setUserFollowing(following));
+        for (let i = 0; i < following.length; i++) {
+          dispatch(fetchUsersData(following[i]));
+        }
       });
   };
 };

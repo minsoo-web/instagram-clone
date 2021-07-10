@@ -12,7 +12,9 @@ const RegisterScreen = () => {
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         // db에 유저 데이터 추가
-        db.collection("users").doc(auth.currentUser.uid).set({ name, email });
+        db.collection("users")
+          .doc(auth.currentUser.uid)
+          .set({ name, email, uid: auth.currentUser.uid });
       })
       .catch(error => alert(error.message));
   };
